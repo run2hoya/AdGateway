@@ -1,33 +1,24 @@
 package com.castis.adgateway.core.model;
 
 
-import com.castis.adgateway.common.AdConstants;
-import com.castis.adgateway.common.setting.Properties;
+import com.castis.adgateway.common.setting.AdConstants;
+import com.castis.adgateway.common.Properties;
 import com.castis.adgateway.core.model.abstractClass.AdDecisionModel;
-import com.castis.adgateway.dto.FileInfo;
 import com.castis.adgateway.dto.lgu.adResponse.ADS;
 import com.castis.adgateway.dto.lgu.adResponse.AdDecisionResponse;
 import com.castis.adgateway.dto.response.v1_5.OpportunityBinding;
-import com.castis.adgateway.dto.response.v1_5.Placement;
 import com.castis.adgateway.dto.response.v1_5.PlacementDecision;
 import com.castis.adgateway.dto.response.v1_5.PlacementResponse;
 import com.castis.adgateway.model.Description;
 import com.castis.adgateway.model.Tracking;
 import com.castis.adgateway.repository.TrackingRepository;
+import com.castis.adlib.dto.FileInfo;
 import com.castis.adlib.dto.TransactionID;
 import com.castis.adlib.util.HttpConnectorUtil;
-import com.castis.adlib.util.idgenerator.GetHardwareIdFailedException;
 import com.castis.adlib.util.idgenerator.IdGenerator;
-import com.castis.adlib.util.idgenerator.InvalidSystemClockException;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
-import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriBuilder;
 
 import java.io.File;
 import java.io.InputStream;
@@ -75,7 +66,7 @@ public class LguAdDecision extends AdDecisionModel {
 			builder.addParameter("runTime", String.valueOf(description.getRunTime()));
 
 			URL url = new URL(builder.build().toString());
-			log.info("{} LGU 광고 요청 request = {}", trId, url);
+			log.info("{} {} LGU 광고 요청 request = {}", trId, (isRetry)? "RETRY" : "", url);
 
 			InputStream is = HttpConnectorUtil.getResponse(url, HttpConnectorUtil.HTTP_GET_METHOD, null, properties.getLguAdServerTimeOut());
 
@@ -105,7 +96,11 @@ public class LguAdDecision extends AdDecisionModel {
 		decision.setId( UUID.randomUUID().toString());				// This UUID is not used.
 		decision.setOpportunityRef( UUID.randomUUID().toString());	// This UUID is not used.
 		adResponse.setPlacementDecision(decision);
-		decision.addDummyPlacement(properties.getDummyAdFile());
+
+		if(hdContent)
+			decision.addDummyPlacement(properties.getDummyHdAdFile());
+		else
+			decision.addDummyPlacement(properties.getDummySdAdFile());
 
 		List<Tracking> trackingList = new ArrayList<Tracking>();
 		for(ADS ad : ads) {

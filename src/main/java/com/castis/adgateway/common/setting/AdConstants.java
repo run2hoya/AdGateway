@@ -1,4 +1,4 @@
-package com.castis.adgateway.common;
+package com.castis.adgateway.common.setting;
 
 
 public class AdConstants {

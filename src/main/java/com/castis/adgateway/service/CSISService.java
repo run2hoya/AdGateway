@@ -1,32 +1,24 @@
 package com.castis.adgateway.service;
 
 
-import com.castis.adgateway.common.setting.Properties;
+import com.castis.adgateway.common.Properties;
 import com.castis.adgateway.dto.ResNotificationInfoDto;
 import com.castis.adgateway.dto.csis.Notification;
-import com.castis.adgateway.dto.lgu.adResponse.AdDecisionResponse;
 import com.castis.adgateway.model.Description;
 import com.castis.adgateway.repository.DescriptionRepository;
 import com.castis.adlib.dto.TransactionID;
 import com.castis.adlib.util.HttpConnectorUtil;
-import com.castis.adlib.util.JsonUtil;
 import com.castis.adlib.util.StringUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Service

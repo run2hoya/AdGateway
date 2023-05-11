@@ -1,6 +1,6 @@
-package com.castis.adgateway.common;
+package com.castis.adgateway.common.setting;
 
-import com.castis.adgateway.common.setting.VersionSetting;
+import com.castis.adgateway.common.VersionSetting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.slf4j.MDC;

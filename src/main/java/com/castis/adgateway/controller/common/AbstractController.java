@@ -1,7 +1,7 @@
 package com.castis.adgateway.controller.common;
 
 
-import com.castis.adgateway.common.setting.Properties;
+import com.castis.adgateway.common.Properties;
 import com.castis.adlib.dto.ResultDetail;
 import com.castis.adlib.dto.TransactionID;
 import com.castis.adlib.util.idgenerator.IdGenerator;

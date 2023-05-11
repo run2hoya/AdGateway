@@ -2,6 +2,7 @@ package com.castis.adgateway.model;
 
 import com.castis.adgateway.dto.csis.Notification;
 import com.castis.adgateway.util.CryptoUtil;
+import com.castis.adlib.dto.enumeration.Status;
 import com.castis.adlib.util.StringUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -33,6 +34,12 @@ public class Tracking {
 
     @Column(name="clickEvent", columnDefinition="TEXT")
     private String clickEvent;
+
+    @Column(name="sendStartEvent")
+    private Boolean sendStartEvent = false;
+
+    @Column(name="sendCompleteEvent")
+    private Boolean sendCompleteEvent = false;
 
 
     @Column(name="registerDate")

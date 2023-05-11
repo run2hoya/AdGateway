@@ -1,4 +1,4 @@
-package com.castis.adgateway.common;
+package com.castis.adgateway.common.setting;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;

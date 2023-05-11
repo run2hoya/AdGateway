@@ -1,6 +1,7 @@
-package com.castis.adgateway.common.setting;
+package com.castis.adgateway.common;
 
 
+import com.castis.adlib.util.idgenerator.IdGenerator;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -20,6 +21,9 @@ import java.util.List;
 @Data
 @Slf4j
 public class Properties {
+
+	@Value("${datacenter}")
+	private Integer datacenter;
 
 	@Value("${retry.dir:/retry/}")
 	private String retryDir;
@@ -52,8 +56,11 @@ public class Properties {
 	@Value("${lguAd.chance:50}")
 	private Double lguAdChance;
 
-	@Value("${dummy.ad.file}")
-	private String dummyAdFile;
+	@Value("${dummy.ad.sd.file}")
+	private String dummySdAdFile;
+
+	@Value("${dummy.ad.hd.file}")
+	private String dummyHdAdFile;
 
 	//AdGateway DB
 
@@ -97,7 +104,7 @@ public class Properties {
 	public void setAndPrintProperties() throws Exception {
 
 		FileUtils.forceMkdir(new File(this.retryDir));
-		
+		IdGenerator.getInstance().setDatacenterId(this.datacenter);
 		List<String> headersList = Arrays.asList("KEY", "VALUE");
 		List<List<String>> rowsList_properties = Arrays.asList(
 				Arrays.asList("retry.dir", this.retryDir)

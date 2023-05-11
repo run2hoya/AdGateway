@@ -2,11 +2,10 @@ package com.castis.adgateway.service;
 
 
 import com.castis.adgateway.common.enumeration.ADCompanyType;
-import com.castis.adgateway.common.setting.Properties;
+import com.castis.adgateway.common.Properties;
 import com.castis.adgateway.core.model.HomechoiceAdDecision;
 import com.castis.adgateway.core.model.LguAdDecision;
 import com.castis.adgateway.core.model.abstractClass.AdDecisionModel;
-import com.castis.adgateway.dto.csis.Notification;
 import com.castis.adgateway.dto.response.v1_5.OpportunityBinding;
 import com.castis.adgateway.dto.response.v1_5.PlacementDecision;
 import com.castis.adgateway.dto.response.v1_5.PlacementResponse;
@@ -14,22 +13,12 @@ import com.castis.adgateway.model.Description;
 import com.castis.adgateway.repository.DescriptionRepository;
 import com.castis.adgateway.repository.TrackingRepository;
 import com.castis.adlib.dto.TransactionID;
-import com.castis.adlib.dto.exception.CiException;
 import com.castis.adlib.dto.exception.CiRuntimeException;
-import com.castis.adlib.util.HttpConnectorUtil;
 import com.castis.adlib.util.StringUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.JAXBException;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Service
@@ -77,6 +66,7 @@ public class AdDecisionService {
                     adDecisionModel = new LguAdDecision(trId, properties, description, vodRequestId, messageId, trackingRepository);
                 }
 
+                adDecisionModel.setRetry(true);
                 placementResponse = adDecisionModel.decisionAd();
             }
 

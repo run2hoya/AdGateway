@@ -1,14 +1,12 @@
 package com.castis.adgateway.dto.response.v1_5;
 
-import com.castis.adgateway.common.AdConstants;
+import com.castis.adgateway.common.setting.AdConstants;
 import com.castis.adgateway.dto.response.v1_5.responseAd.CorePlacement;
 import com.castis.adgateway.dto.response.v1_5.responseAd.PlacementDecisionADSM;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.*;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

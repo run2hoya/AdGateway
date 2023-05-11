@@ -1,7 +1,7 @@
-package com.castis.adgateway.common;
+package com.castis.adgateway.common.setting;
 
 
-import com.castis.adgateway.common.setting.VersionSetting;
+import com.castis.adgateway.common.VersionSetting;
 import org.slf4j.MDC;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
