@@ -15,6 +15,7 @@ import com.castis.adgateway.repository.TrackingRepository;
 import com.castis.adlib.dto.FileInfo;
 import com.castis.adlib.dto.TransactionID;
 import com.castis.adlib.util.HttpConnectorUtil;
+import com.castis.adlib.util.StringUtil;
 import com.castis.adlib.util.idgenerator.IdGenerator;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +59,8 @@ public class LguAdDecision extends AdDecisionModel {
 			builder.addParameter("category", description.getCategory());
 			builder.addParameter("contentProvider", description.getContentProvider());
 			builder.addParameter("watchingGrade", description.getWatchingGrade());
-			builder.addParameter("series", description.getSeries());
+			if(!StringUtil.isNull(description.getSeries()))
+				builder.addParameter("series", description.getSeries());
 			builder.addParameter("regionCode", description.getRegionCode());
 			builder.addParameter("payPerView", description.getPayPerView());
 			builder.addParameter("resumeYn", description.getResumeYn());
