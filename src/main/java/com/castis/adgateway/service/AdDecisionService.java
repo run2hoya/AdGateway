@@ -55,20 +55,23 @@ public class AdDecisionService {
 
             PlacementResponse placementResponse = adDecisionModel.decisionAd();
 
-            //광고가 없을 경우 반대쪽으로 다시 요청
-            if(placementResponse == null || !StringUtil.isNotEmpty(placementResponse.getPlacementDecision().getPlacementList())) {
+            if(properties.getRetryOtherAD()) {
+                //광고가 없을 경우 반대쪽으로 다시 요청
+                if(placementResponse == null || !StringUtil.isNotEmpty(placementResponse.getPlacementDecision().getPlacementList())) {
 
-                log.info("{} 광고 결정 정보가 없습니다. 다른 결정 서버로 광고 요청합니다.", trId);
+                    log.info("{} 광고 결정 정보가 없습니다. 다른 결정 서버로 광고 요청합니다.", trId);
 
-                if(adCompanyType == ADCompanyType.LGU) {
-                    adDecisionModel = new HomechoiceAdDecision(trId, properties, description, vodRequestId, messageId);
-                } else {
-                    adDecisionModel = new LguAdDecision(trId, properties, description, vodRequestId, messageId, trackingRepository);
+                    if(adCompanyType == ADCompanyType.LGU) {
+                        adDecisionModel = new HomechoiceAdDecision(trId, properties, description, vodRequestId, messageId);
+                    } else {
+                        adDecisionModel = new LguAdDecision(trId, properties, description, vodRequestId, messageId, trackingRepository);
+                    }
+
+                    adDecisionModel.setRetry(true);
+                    placementResponse = adDecisionModel.decisionAd();
                 }
-
-                adDecisionModel.setRetry(true);
-                placementResponse = adDecisionModel.decisionAd();
             }
+
 
             if(placementResponse == null)
                 return generateADResponseFail(vodRequestId, messageId);

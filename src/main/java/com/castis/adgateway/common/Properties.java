@@ -62,6 +62,9 @@ public class Properties {
 	@Value("${dummy.ad.hd.file}")
 	private String dummyHdAdFile;
 
+	@Value("${retry.other.ad:false}")
+	private Boolean retryOtherAD;
+
 	//AdGateway DB
 
 
