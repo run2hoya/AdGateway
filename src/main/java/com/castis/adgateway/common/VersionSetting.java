@@ -8,7 +8,7 @@ public class VersionSetting {
 	static final Log		log = LogFactory.getLog( VersionSetting.class );
 	
 	public static final String	PRODUCT_VERSION_KEY	= "productVersion";
-	public static final	String	PRODUCT_VERSION		=	"1.0.0.qr11";
+	public static final	String	PRODUCT_VERSION		=	"1.0.1.qr1";
 	
 	public VersionSetting() {
 		super();		

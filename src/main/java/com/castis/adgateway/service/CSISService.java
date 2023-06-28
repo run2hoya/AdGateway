@@ -37,7 +37,18 @@ public class CSISService {
         Notification notification = null;
 
         try {
-            descriptionStr = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+            //descriptionStr = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+
+            InputStream inputStream = request.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "EUC-KR"));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+
+            descriptionStr = stringBuilder.toString();
 
             log.info("{} description = {}", trId, descriptionStr);
             notification = Notification.unmarshaling(descriptionStr);
