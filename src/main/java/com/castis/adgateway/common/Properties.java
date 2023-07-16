@@ -110,7 +110,20 @@ public class Properties {
 		IdGenerator.getInstance().setDatacenterId(this.datacenter);
 		List<String> headersList = Arrays.asList("KEY", "VALUE");
 		List<List<String>> rowsList_properties = Arrays.asList(
-				Arrays.asList("retry.dir", this.retryDir)
+				Arrays.asList("datacenter", String.valueOf(this.datacenter)),
+				Arrays.asList("retry.dir", this.retryDir),
+				Arrays.asList("csisUrl", this.csisUrl),
+				Arrays.asList("lguUrl", this.lguAdUrl),
+				Arrays.asList("csis.serverTimeOut", String.valueOf(this.csisServerTimeOut)),
+				Arrays.asList("lguAd.serverTimeOut", String.valueOf(this.lguAdServerTimeOut)),
+				Arrays.asList("assetDispatcherUrl", this.assetDispatcherUrl),
+				Arrays.asList("assetDispatcher.serverTimeOut", String.valueOf(this.assetDispatcherServerTimeOut)),
+				Arrays.asList("adsmUrl", this.adsmUrl),
+				Arrays.asList("adsm.serverTimeOut", String.valueOf(this.adsmServerTimeOut)),
+				Arrays.asList("lguAd.chance", String.valueOf(this.lguAdChance)),
+				Arrays.asList("dummy.ad.sd.file", this.dummySdAdFile),
+				Arrays.asList("dummy.ad.hd.file", this.dummyHdAdFile),
+				Arrays.asList("retry.other.ad", String.valueOf(this.retryOtherAD))
 		);
 
 				

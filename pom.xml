@@ -7,7 +7,7 @@
     <name>AdGateway</name>
     <artifactId>AdGateway</artifactId>
     <packaging>war</packaging>
-    <version>1.0.1.QR1</version>
+    <version>1.0.1.QR2</version>
 
 
     <properties>

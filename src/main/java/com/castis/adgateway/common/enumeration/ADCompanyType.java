@@ -3,7 +3,8 @@ package com.castis.adgateway.common.enumeration;
 public enum ADCompanyType {
     UNKNOWN("UNKNOWN"),
     LGU("LGU"),
-    HOME_CHOICE("HOME_CHOICE");
+    HOME_CHOICE("HOME_CHOICE"),
+    ONLY_HOME_CHOICE("ONLY_HOME_CHOICE");
 
     private final String value;
 

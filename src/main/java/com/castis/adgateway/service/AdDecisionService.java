@@ -45,17 +45,22 @@ public class AdDecisionService {
             //일정 확률로 lgu 또는 홈초이스 광고를 선택
             ADCompanyType adCompanyType = selectAdCompany();
 
+            if(StringUtil.isNull(description.getCategory())) {
+                log.info("{} description 정보에 category 정보가 없습니다. 홈초이스 광고서버로 요청합니다.", trId);
+                adCompanyType = ADCompanyType.ONLY_HOME_CHOICE;
+            }
+
             AdDecisionModel adDecisionModel;
             if(adCompanyType == ADCompanyType.LGU) {
                 adDecisionModel = new LguAdDecision(trId, properties, description, vodRequestId, messageId, trackingRepository);
-            } else if(adCompanyType == ADCompanyType.HOME_CHOICE) {
+            } else if(adCompanyType == ADCompanyType.HOME_CHOICE || adCompanyType == ADCompanyType.ONLY_HOME_CHOICE) {
                 adDecisionModel = new HomechoiceAdDecision(trId, properties, description, vodRequestId, messageId);
             } else
                 throw new CiRuntimeException("Invalid AdCompanyType");
 
             PlacementResponse placementResponse = adDecisionModel.decisionAd();
 
-            if(properties.getRetryOtherAD()) {
+            if(adCompanyType != ADCompanyType.ONLY_HOME_CHOICE && properties.getRetryOtherAD()) {
                 //광고가 없을 경우 반대쪽으로 다시 요청
                 if(placementResponse == null || !StringUtil.isNotEmpty(placementResponse.getPlacementDecision().getPlacementList())) {
 
